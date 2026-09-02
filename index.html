@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loxo Tour and Travel - Explore Rwanda, Create Memories</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        :root {
+            --primary: #1b4d3e;
+            --accent: #d4af37;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+        }
+
+        body {
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: var(--light);
+        }
+
+        header {
+            background-color: var(--primary);
+            color: white;
+            padding: 1rem 5%;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .circular-logo {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            border: 2px solid var(--accent);
+            background-color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: var(--primary);
+            font-size: 0.9rem;
+        }
+
+        .logo-text {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: var(--accent);
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 1.5rem;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--accent);
+        }
+
+        /* UPDATED TOUR BACKGROUND IMAGE */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)), url('https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+            height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding: 0 1rem;
+        }
+
+        .hero h1 {
+            font-size: 3.2rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
+        }
+
+        .hero .tagline {
+            font-size: 1.5rem;
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 1rem;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 650px;
+            margin-bottom: 1.8rem;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
+        }
+
+        .btn {
+            background-color: var(--accent);
+            color: var(--dark);
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: background 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #b89628;
+        }
+
+        section {
+            padding: 4rem 5%;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: var(--primary);
+        }
+
+        /* About Section */
+        .about-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 1.5rem;
+        }
+
+        .about-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.08);
+            border-top: 4px solid var(--accent);
+        }
+
+        .about-card h3 {
+            color: var(--primary);
+            margin-bottom: 0.8rem;
+        }
+
+        /* Services Grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .card {
+            background: white;
+            padding: 1.8rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .card h3 {
+            color: var(--primary);
+            margin-bottom: 0.8rem;
+        }
+
+        /* Carousel Gallery Section */
+        .carousel-wrapper {
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+            background-color: #000;
+        }
+
+        .carousel-container {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+            width: 100%;
+        }
+
+        .carousel-slide {
+            min-width: 100%;
+            height: 450px;
+            position: relative;
+        }
+
+        .carousel-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .carousel-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.85));
+            color: white;
+            padding: 2rem 1.5rem 1rem;
+            font-size: 1.25rem;
+            font-weight: 500;
+            text-align: center;
+        }
+
+        .nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(27, 77, 62, 0.8);
+            color: white;
+            border: 2px solid var(--accent);
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            z-index: 10;
+        }
+
+        .nav-btn:hover {
+            background: var(--accent);
+            color: var(--dark);
+        }
+
+        .prev-btn { left: 15px; }
+        .next-btn { right: 15px; }
+
+        .indicators {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 1rem;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            background-color: #ccc;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .dot.active {
+            background-color: var(--primary);
+            transform: scale(1.2);
+        }
+
+        /* Management Section */
+        .manager-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            align-items: center;
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .manager-img {
+            flex: 1;
+            min-width: 250px;
+            max-width: 350px;
+            border-radius: 8px;
+            width: 100%;
+            height: auto;
+        }
+
+        .manager-info {
+            flex: 2;
+            min-width: 280px;
+        }
+
+        .manager-info h3 {
+            color: var(--primary);
+            font-size: 1.5rem;
+        }
+
+        .manager-info .title {
+            color: var(--accent);
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        /* Contact Section */
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        footer {
+            background-color: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            nav a {
+                margin: 0 0.5rem;
+            }
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            .carousel-slide {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-container">
+            <div class="circular-logo"><img src="images/loxologo.jpg" height="80%" width="80%"></div>
+            <div class="logo-text">LOXO TOUR AND TRAVEL</div>
+        </div>
+        <nav>
+            <a href="#about">About Us</a>
+            <a href="#services">Services</a>
+            <a href="#gallery">Gallery</a>
+            <a href="#manager">Management</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
+    <div class="hero">
+        <h1>LOXO TOUR AND TRAVEL</h1>
+        <div class="tagline">Explore Rwanda, Create Memories</div>
+        <p>Your trusted partner for unforgettable travel experiences, seamless guidance, and authentic discovery in Rwanda.</p>
+        <a href="#contact" class="btn">Book Your Experience</a>
+    </div>
+
+    <section id="about">
+        <h2 class="section-title">Who We Are</h2>
+        <p style="text-align: center; max-width: 800px; margin: 0 auto 2rem; font-size: 1.1rem;">
+            Loxo Tour and Travel is a Rwanda-based tour and travel company dedicated to providing memorable, safe, and personalized travel experiences for local and international visitors in Kigali and beyond.
+        </p>
+
+        <div class="about-grid">
+            <div class="about-card">
+                <h3>Our Vision</h3>
+                <p>To be a trusted and leading tour and travel company in Rwanda and East Africa, creating memorable travel experiences through exceptional service, innovation, and sustainable tourism.</p>
+            </div>
+            <div class="about-card">
+                <h3>Our Mission</h3>
+                <p>To provide reliable, safe, and personalized travel services while promoting Rwanda's natural beauty, wildlife, and cultural heritage to the world.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" style="background-color: #f0f4f2;">
+        <h2 class="section-title">Our Services</h2>
+        <div class="services-grid">
+            <div class="card">
+                <h3>Gorilla Trekking & Wildlife Safaris</h3>
+                <p>Excursions to Volcanoes and Akagera National Parks for gorilla tracking and wildlife safaris.</p>
+            </div>
+            <div class="card">
+                <h3>Language Translation & Guidance</h3>
+                <p>Professional language translation (Kinyarwanda, English, French) and personalized tour guidance.</p>
+            </div>
+            <div class="card">
+                <h3>Cultural Tours & City Excursions</h3>
+                <p>Authentic cultural heritage tours and guided city sightseeing around vibrant Kigali.</p>
+            </div>
+            <div class="card">
+                <h3>Transfers & Reservations</h3>
+                <p>Airport transfers, transport logistics, hotel reservations, and customized holiday packages.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="gallery">
+        <h2 class="section-title">Tour Showcase Gallery</h2>
+        
+        <div class="carousel-wrapper">
+            <button class="nav-btn prev-btn" id="prevBtn">&#10094;</button>
+            <button class="nav-btn next-btn" id="nextBtn">&#10095;</button>
+
+            <div class="carousel-container" id="carouselTrack">
+                <div class="carousel-slide">
+                    <img src="https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?auto=format&fit=crop&w=1000&q=80" alt="Gorilla Trekking">
+                    <div class="carousel-caption">Mountain Gorilla Trekking Experience</div>
+                </div>
+                <div class="carousel-slide">
+                    <img src="https://images.unsplash.com/photo-1578632767115-351597cf2477?auto=format&fit=crop&w=1000&q=80" alt="Kigali City Excursion">
+                    <div class="carousel-caption">Kigali City Excursions & Cultural Tours</div>
+                </div>
+                <div class="carousel-slide">
+                    <img src="https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=1000&q=80" alt="Wildlife Safaris">
+                    <div class="carousel-caption">Akagera National Park Safaris</div>
+                </div>
+                <div class="carousel-slide">
+                    <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1000&q=80" alt="Scenic Scenery">
+                    <div class="carousel-caption">Lake Kivu & Scenic Landscapes</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="indicators" id="indicatorContainer"></div>
+    </section>
+
+    <section id="manager" style="background-color: #f0f4f2;">
+        <h2 class="section-title">Leadership</h2>
+        <div class="manager-container">
+            <img src="images/owner.PNG" alt="General Manager" class="manager-img">
+            <div class="manager-info">
+                <h3>Christian Murenzi</h3>
+                <p class="title">General Manager & Founder</p>
+                <p>"Welcome to Rwanda, the land of a thousand hills. At Loxo Tour and Travel, our goal is to deliver authentic, safe, and personalized travel experiences. Whether you need language translation support, guided city excursions, or gorilla trekking, our team ensures every journey creates everlasting memories."</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2 class="section-title">Contact Us</h2>
+        <form class="contact-form" action="https://formsubmit.co/malaikajiradukunda@gmail.com" method="POST">
+            <input type="hidden" name="_subject" value="New Inquiry - Loxo Tour and Travel">
+            <input type="hidden" name="_captcha" value="false">
+
+            <div class="form-group">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" name="Full Name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="Email" required>
+            </div>
+            <div class="form-group">
+                <label for="service">Service Needed</label>
+                <input type="text" id="service" name="Service Needed" placeholder="e.g., Gorilla Trekking, Translation, City Excursion" required>
+            </div>
+            <div class="form-group">
+                <label for="message">Message</label>
+                <textarea id="message" name="Message" rows="4" required></textarea>
+            </div>
+            <button type="submit" class="btn" style="width: 100%;">Send Inquiry</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>tel : +250 783462255</p>
+        <p>&copy; 2026 LOXO TOUR AND TRAVEL. Explore Rwanda, Create Memories.</p>
+    </footer>
+
+    <script>
+        // Carousel Logic
+        const track = document.getElementById('carouselTrack');
+        const slides = document.querySelectorAll('.carousel-slide');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const indicatorContainer = document.getElementById('indicatorContainer');
+
+        let currentIndex = 0;
+        const totalSlides = slides.length;
+
+        slides.forEach((_, i) => {
+            const dot = document.createElement('div');
+            dot.classList.add('dot');
+            if (i === 0) dot.classList.add('active');
+            dot.addEventListener('click', () => goToSlide(i));
+            indicatorContainer.appendChild(dot);
+        });
+
+        const dots = document.querySelectorAll('.dot');
+
+        function updateCarousel() {
+            track.style.transform = `translateX(-${currentIndex * 100}%)`;
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentIndex);
+            });
+        }
+
+        function goToSlide(index) {
+            currentIndex = index;
+            updateCarousel();
+        }
+
+        function nextSlide() {
+            currentIndex = (currentIndex + 1) % totalSlides;
+            updateCarousel();
+        }
+
+        function prevSlide() {
+            currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+            updateCarousel();
+        }
+
+        nextBtn.addEventListener('click', nextSlide);
+        prevBtn.addEventListener('click', prevSlide);
+    </script>
+
+</body>
+</html>
